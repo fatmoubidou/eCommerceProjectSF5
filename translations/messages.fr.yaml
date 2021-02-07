@@ -1,0 +1,8 @@
+form:
+  register:
+    firstname: Prénom
+    lastname: Nom
+    email: Email
+    password: Mot de passe
+    confirmPassword: Confirmation de mot de passe
+    register: S'inscrire
