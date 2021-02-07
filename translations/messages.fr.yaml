@@ -6,3 +6,10 @@ form:
     password: Mot de passe
     confirmPassword: Confirmation de mot de passe
     register: S'inscrire
+  login:
+    connexionTitle: Connexion
+    email: Email
+    password: Mot de passe
+    connexionButton: Se connecter
+    connexionAs: Vous êtes connecté en tant que 
+    logoutLink: Deconnexion
