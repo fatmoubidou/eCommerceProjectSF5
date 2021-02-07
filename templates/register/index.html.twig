@@ -3,6 +3,22 @@
 {% block title %}Inscription - Caftaned{% endblock %}
 
 {% block content %}
-    <h1>Inscription </h1>
-    {{ form(form) }}
+    <div class="row w-50 m-auto justify-content-center">
+        <h1>Inscription </h1>
+        {{ form_start(form) }}
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+            {{ form_label(form.lastname) }}
+            {{ form_widget(form.lastname) }}
+            
+            </div>
+            <div class="col-md-6 mb-3">
+            {{ form_label(form.firstname) }}
+            {{ form_widget(form.firstname) }}
+            </div>
+        </div>
+
+        {{ form(form) }}
+        {{ form_end(form) }}
+    </div>
 {% endblock %}
