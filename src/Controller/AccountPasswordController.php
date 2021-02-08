@@ -19,6 +19,7 @@ class AccountPasswordController extends AbstractController
                             UserPasswordEncoderInterface $passwordEncoder,
                             EntityManagerInterface $entityManager): Response
     {
+        $validation = null;
         $user = $this->getUser();
         $form = $this->createForm(ChangePasswordType::class, $user);
 
@@ -32,14 +33,17 @@ class AccountPasswordController extends AbstractController
                 $password = $passwordEncoder->encodePassword($user, $newPassword);
 
                 $user->setPassword($password);
-
                 $entityManager->flush();
+                $validation = "<div class='alert alert-success w-100 text-center'>Votre mot de passe est modifié</div>";
+            } else{
+                $validation = "<div class='alert alert-danger w-100 text-center'>Votre mot de passe actuel est erroné</div>";
             }
         }
         
 
         return $this->render('account/change_password.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form->createView(), 
+            'validation' => $validation,
         ]);
     }
 }
