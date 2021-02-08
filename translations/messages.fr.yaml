@@ -13,3 +13,8 @@ form:
     connexionButton: Se connecter
     connexionAs: Vous êtes connecté en tant que 
     logoutLink: Deconnexion
+  password:
+    oldPassword: Mot de passe actuel
+    newPassword: Nouveau mot de passe
+    confirmNewPassword: Confirmation du nouveau mot de passe
+    updatePassword: Mettre à jour
