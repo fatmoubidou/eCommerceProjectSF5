@@ -1,7 +1,11 @@
+body{
+    position: relative;
+}
+
 .footer-custom{
     width: 100%;
     text-align: center;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     padding-top: 15px;
     background-color: #c5c5c5;

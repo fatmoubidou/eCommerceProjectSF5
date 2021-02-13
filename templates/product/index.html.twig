@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Notre catalogue produits - Caftaned{% endblock %}
+
+{% block content %}
+    <h1>Notre catalogue</h1>
+    
+    <div class="row">
+        <div class="col-md-3">
+        filtres
+        </div>
+
+        <div class="col-md-9">
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-md-4">
+                        <div class="card">
+                            <a href="{{path('product', { slug : product.slug })}}" class="card-link">
+                                <img class="card-img-top" style="height: 250px;" src="/uploads/files/{{product.image}}" alt="Card image cap">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">{{product.name}}</h5>
+                                <p class="card-text">{{product.subtitle}}</p>
+                            </div>
+                            <div class="card-body">
+                                <span>{{(product.price / 100)|number_format(2, ',','.')}} €</span>
+                                <a href="{{path('product', { slug : product.slug })}}" class="card-link">Détails</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

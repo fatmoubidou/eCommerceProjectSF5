@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{product.name}} - Caftaned{% endblock %}
+
+{% block content %}
+    <h1>{{product.name}}</h1>
+
+    <div class="row">
+        <div class="col-md-3">
+        filtres
+        </div>
+
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="card-img-top" src="/uploads/files/{{product.image}}" alt="Card image cap">   
+                </div>
+                <div class="col-md-8">
+                    <h5 class="card-title">{{product.name}}</h5>
+                    <p class="card-text">{{product.subtitle}}</p>
+                    <p class="card-text">{{product.description|raw}}</p>
+                    <hr>
+
+                    <div class="d-flex justify-content-between">
+                        <span>{{(product.price / 100)|number_format(2, ',','.')}} €</span>
+                        <button type="button" class="btn btn-primary">Ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
