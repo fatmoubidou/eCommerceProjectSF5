@@ -18,3 +18,12 @@ form:
     newPassword: Nouveau mot de passe
     confirmNewPassword: Confirmation du nouveau mot de passe
     updatePassword: Mettre à jour
+  search:
+    filter: Filtrer
+    yourSearch: Votre recherche ...
+    byCategory: Par catégories
+catalog: 
+  catalog: Notre catalogue
+  products: Nos produits
+  details: Détails
+  addCart: Ajouter au panier
