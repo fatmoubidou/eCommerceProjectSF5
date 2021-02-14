@@ -1,7 +1,8 @@
 
 .footer-custom{
     width: 100%;
-    display: block;
+    position:absolute;
+    bottom: 0;
     text-align: center;
     padding-top: 15px;
     background-color: #c5c5c5;

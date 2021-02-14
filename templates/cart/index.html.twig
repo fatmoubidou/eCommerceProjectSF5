@@ -10,9 +10,10 @@
         <thead>
             <tr class="d-flex">
                 <th scope="col" class="col-6" colspan="2">Produit</th>
-                <th scope="col" class="col-2">Quantité</th>
+                <th scope="col" class="col-1">Quantité</th>
                 <th scope="col" class="col-2">Prix</th>
                 <th scope="col" class="col-2">Total</th>
+                <th scope="col" class="col-1">Supprimer</th>
             </tr>
         </thead>
         <tbody>
@@ -23,20 +24,33 @@
                         <img class="img-thumbnail" style="width:100px; height:100px" src="/uploads/files/{{product.product.image}}" alt="{{product.product.name}}">
                     </td>
                     <td class="col-4 border-0">{{product.product.name}}</td>
-                    <td class="col-2 border-0">{{product.quantity}}</td>
+                    <td class="col-1 border-0 text-center">
+                        <a href="{{ path('decrease_to_cart', { 'id' : product.product.id })}}">
+                            <i class="bi bi-dash-circle-fill"></i>
+                        </a>
+                        {{product.quantity}} 
+                        <a href="{{ path('add_to_cart', { 'id' : product.product.id })}}">
+                            <i class="bi bi-plus-circle-fill"></i> 
+                        </a>
+                    </td>
                     <td class="col-2 border-0">{{(product.product.price / 100)|number_format(2, ',','.')}} €</td>
                     <td class="col-2 border-0">{{(product.quantity * product.product.price / 100)|number_format(2, ',','.')}} €</td>
+                    <td class="col-1 border-0 text-center">
+                        <a href="{{ path('delete_product_to_cart', { 'id' : product.product.id })}}">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
                 </tr>
             {% set total = total + (product.quantity * product.product.price) %}
             {% endfor %}
         </tbody>
         <tfoot>
             <tr class="d-flex">
-                <th class="text-right col-10" colspan="4">Panier total : </th>
-                <th class="align-middle col-2">{{(total / 100)|number_format(2, ',','.')}} €</th>
+                <th class="text-right col-10" colspan="5">Panier total : </th>
+                <th class="text-right col-2 align-middle ">{{(total / 100)|number_format(2, ',','.')}} €</th>
             </tr>
             <tr>
-                <td class="text-right" colspan="5">
+                <td class="text-right" colspan="6">
                     <a class="btn btn-success" href="#" role="button">Valider ma commande</a>
                 </td>
             </tr>
