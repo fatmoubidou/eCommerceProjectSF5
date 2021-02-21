@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande - Caftaned{% endblock %}
+
+{% block content %}
+    <h1>Récapitulatif de commande</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            {{ form(form)|replace({'[br]' : '<br/>'})|raw }}
+        </div> 
+
+        <div class="col-md-6">
+            <p style="padding-top:calc(.375rem + 1px); font-weight:bold">Récapitulatif des produits</p>
+            {% set total = 0 %}
+            {% for product in cart %}
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <img class="img-thumbnail" style="width:100px; height:100px" src="/uploads/files/{{product.product.image}}" alt="{{product.product.name}}">
+                    </div>
+
+                    <div class="col-md-3 my-auto">
+                        {{product.product.name}}
+                    </div>
+
+                    <div class="col-md-2 my-auto">
+                        {{(product.product.price / 100)|number_format(2, ',','.')}} €
+                    </div>
+
+                    <div class="col-md-2 my-auto">
+                        x {{product.quantity}}
+                    </div>
+
+                    <div class="col-md-2 my-auto">
+                        {{(product.quantity * product.product.price / 100)|number_format(2, ',','.')}} €
+                    </div>
+                </div>
+                {% set total = total + (product.quantity * product.product.price) %}
+            {% endfor %}
+            <div class="row mb-3">
+                    <div class="col-md-10 text-right">
+                        <strong class="fw-bold">Total de la commande</strong>
+                    </div>
+
+                    <div class="col-md-2 my-auto">
+                        <strong class="fw-bold">{{(total / 100)|number_format(2, ',','.')}} €</strong>
+                    </div>
+                </div>
+        </div>
+    </div>  
+{% endblock %}
