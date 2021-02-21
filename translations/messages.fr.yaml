@@ -22,6 +22,17 @@ form:
     filter: Filtrer
     yourSearch: Votre recherche ...
     byCategory: Par catégories
+  address:
+    name: Nom de l'adresse
+    company: Société (facultatif)
+    firstname: Prénom
+    lastname: Nom
+    address: Adresse
+    city: Ville
+    zipcode: Code postal
+    country: Pays
+    phone: Téléphone
+    valid: Valider
 catalog: 
   catalog: Notre catalogue
   products: Nos produits

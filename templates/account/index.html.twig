@@ -4,10 +4,38 @@
 
 {% block content %}
 <h1 class="mb-3 font-weight-normal">Mon compte</h1>
-Bienvenue <strong>{{ app.user.firstname }}</strong>.<br>
-<a href="{{path('account_change_password')}}">Modifier mon mot de passe</a>
-<a href="{{path('')}}">Gérer mes adresses</a>
-<hr>
+
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <a href="">
+                    <h5 class="card-title text-center">Mes commandes</h5>
+                <a/>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <a href="{{path('account_address')}}">
+                    <h5 class="card-title text-center">Gérer mes adresses</h5>
+                <a/>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <a href="{{path('account_change_password')}}">
+                    <h5 class="card-title text-center">Modifier mon mot de passe</h5>
+                <a/>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}

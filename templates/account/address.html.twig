@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gérer mes adresses - Mon compte - Caftaned{% endblock %}
+
+{% block content %}
+    <a href="{{path('account')}}">Retour à Mon compte</a>
+    <hr>
+
+    <div class="d-flex justify-content-between mb-3">
+        <div><h3 class="font-weight-normal">Mes adresses</h3></div>
+        <div><a href="{{path('account_add_address')}}" class="btn btn-primary">Ajouter une adresse</a></div>
+    </div>
+    
+
+    <div class="row">
+    {% if app.user.addresses|length == 0 %}
+        <p>Vous n'avez pas d'adresse. Pour ajouter une adresse <a href="{{path('account_add_address')}}">cliquez ici</a></p>
+    {% else %}
+        {% for address in app.user.addresses %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ address.name }}</h5>
+                    <p class="card-text">
+                        {{ address.address }}<br>
+                        {{ address.zipcode }} {{ address.city }}
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <a href="{{path('account_edit_address', { id: address.id })}}" >Modifier</a>
+                        <a href="{{path('account_delete_address', { id: address.id })}}" >Supprimer</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+            
+        {% endfor %}
+    {% endif %}
+    </div>
+    
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer une adresse - Mon compte - Caftaned{% endblock %}
+
+{% block content %}
+    <a href="{{path('account')}}">Retour à Mon compte</a>
+    <hr>
+
+    <div class="d-flex justify-content-between mb-3">
+        <div><h3 class="font-weight-normal">Editer une adresse</h3></div>
+        <div><a href="{{path('account_address')}}" class="btn btn-primary">Liste des adresses</a></div>
+    </div>
+
+    <div class="row w-50 m-auto justify-content-center">
+        
+        {{ form_start(form) }}
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+            {{ form_label(form.company) }}
+            {{ form_widget(form.company) }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+            {{ form_label(form.lastname) }}
+            {{ form_widget(form.lastname) }}
+            
+            </div>
+            <div class="col-md-6 mb-3">
+            {{ form_label(form.firstname) }}
+            {{ form_widget(form.firstname) }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+            {{ form_label(form.address) }}
+            {{ form_widget(form.address) }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+            {{ form_label(form.zipcode) }}
+            {{ form_widget(form.zipcode) }}
+            
+            </div>
+            <div class="col-md-6 mb-3">
+            {{ form_label(form.city) }}
+            {{ form_widget(form.city) }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+            {{ form_label(form.country) }}
+            {{ form_widget(form.country) }}
+            
+            </div>
+            <div class="col-md-6 mb-3">
+            {{ form_label(form.phone) }}
+            {{ form_widget(form.phone) }}
+            </div>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
