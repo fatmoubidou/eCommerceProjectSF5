@@ -7,9 +7,13 @@
 
     <div class="row">
         <div class="col-md-6">
-            {{ form_start(form, {action: path('order_summary') } ) }}
-                {{ form(form)|replace({'[br]' : '<br/>'})|raw }}
-            {{ form_end(form) }}
+            <strong style="padding-top:calc(.375rem + 1px);">Adresse de livraison</strong><br/>
+            {{ delivery|raw }}
+            <hr>
+            <strong style="padding-top:calc(.375rem + 1px);">Transporteur</strong><br/>
+            {{ carrier.name }}<br/>
+            {{ carrier.description }}<br/>
+            {{ carrier.price|number_format(2, ',','.') }} €<br/>
         </div> 
 
         <div class="col-md-6">
@@ -39,13 +43,37 @@
                 </div>
                 {% set total = total + (product.quantity * product.product.price) %}
             {% endfor %}
-            <div class="row mb-3">
+                <div class="row mb-3">
                     <div class="col-md-10 text-right">
-                        <strong class="fw-bold">Total de la commande</strong>
+                        <strong class="fw-bold">Sous-total </strong>
                     </div>
 
                     <div class="col-md-2 my-auto">
                         <strong class="fw-bold">{{(total / 100)|number_format(2, ',','.')}} €</strong>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-10 text-right">
+                        <strong class="fw-bold">livraison </strong>
+                    </div>
+
+                    <div class="col-md-2 my-auto">
+                        <strong class="fw-bold">{{carrier.price|number_format(2, ',','.')}} €</strong>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mb-3">
+                    <div class="col-md-10 text-right">
+                        <strong class="fw-bold">Total de la commande </strong>
+                    </div>
+
+                    <div class="col-md-2 my-auto">
+                        <strong class="fw-bold">{{((total / 100) + carrier.price)|number_format(2, ',','.')}} €</strong>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <a href="" class="btn btn-block btn-success">Payer {{((total / 100) + carrier.price)|number_format(2, ',','.')}} €</a>
                     </div>
                 </div>
         </div>

@@ -51,6 +51,11 @@ class Order
      */
     private $orderDetails;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $status;
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
@@ -121,6 +126,17 @@ class Order
         return $this;
     }
 
+    public function getTotalPrice()
+    {
+        $totalPrice = null;
+        
+        foreach($this->getOrderDetails()->getValues() as $product){
+            $totalPrice += $product->getPrice() * $product->getQuantity();
+        }
+
+        return $totalPrice;
+    }
+
     /**
      * @return Collection|OrderDetails[]
      */
@@ -147,6 +163,18 @@ class Order
                 $orderDetail->setOrderClient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

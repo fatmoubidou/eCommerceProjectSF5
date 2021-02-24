@@ -32,18 +32,39 @@ class OrderController extends AbstractController
         }
 
         $form = $this->createForm(OrderType::class, null, ['user' => $this->getUser()]);
+        
+
+        return $this->render('order/index.html.twig', [
+            'form' => $form->createView(),
+            'cart' => $cart->getFull(),
+        ]);
+    }
+
+
+        /**
+     * @Route("/commande/recapitulatif", name="order_summary", methods="POST")
+     */
+    public function add(Request $request, CartManager $cart): Response
+    {
+        $form = $this->createForm(OrderType::class, null, ['user' => $this->getUser()]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
+            $carrier = $form->get('carriers')->getData();
+            $address = $form->get('addresses')->getData();
+            $delivery = $address->getFirstname().' '.$address->getLastname().'<br/>';
+            $delivery .= (!empty($address->getCompany()))??$address->getCompany().'<br/>';
+            $delivery .= $address->getAddress().'<br/>';
+            $delivery .= $address->getZipcode().' '.$address->getCity().' '.$address->getCountry();
+
             $order = new Order();
             $order->setUser($this->getUser());
             $order->setCreatedAt(new DateTime('NOW'));
-            $order->setcarrierName($form->getData()['carriers']->getName());
-            $order->setcarrierPrice($form->getData()['carriers']->getPrice());
-            $order->setDelivery($form->getData()['addresses']->getName());
-
+            $order->setcarrierName($carrier->getName());
+            $order->setcarrierPrice($carrier->getPrice());
+            $order->setDelivery($delivery);
+            $order->setStatus(0);
             $this->em->persist($order);
-            $this->em->flush();
 
             foreach($cart->getFull() as $product){
                 $orderDetails = new OrderDetails();
@@ -54,12 +75,16 @@ class OrderController extends AbstractController
                 $orderDetails->setTotal($product['quantity'] * $product['product']->getPrice());
                 $this->em->persist($orderDetails);
             }
+
             $this->em->flush();
+
+            return $this->render('order/add.html.twig', [
+                'cart' => $cart->getFull(),
+                'carrier' => $carrier,
+                'delivery' => $delivery
+            ]);
         }
 
-        return $this->render('order/index.html.twig', [
-            'form' => $form->createView(),
-            'cart' => $cart->getFull(),
-        ]);
+        return $this->redirectToRoute('cart');
     }
 }
